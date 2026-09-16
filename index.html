@@ -1,1 +1,134 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>藍沢ネオン｜観測日誌</title>
+<style>
+:root{
+  --bg:#071117; --panel:rgba(8,20,28,.88); --line:#1e6879;
+  --cyan:#54e9ff; --cyan2:#0dbbd8; --text:#d8f7fb; --muted:#78a9b3;
+}
+*{box-sizing:border-box}
+body{margin:0;background:
+ radial-gradient(circle at 78% 15%,rgba(31,209,235,.14),transparent 28%),
+ linear-gradient(135deg,#04090d 0%,#07151c 52%,#05090c 100%);
+ color:var(--text);font-family:Inter,"Noto Sans JP",system-ui,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
+ background-image:linear-gradient(rgba(84,233,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(84,233,255,.08) 1px,transparent 1px);
+ background-size:40px 40px}
+.header{height:76px;border-bottom:1px solid rgba(84,233,255,.25);display:flex;align-items:center;
+ padding:0 6vw;justify-content:space-between;background:rgba(3,10,14,.75);backdrop-filter:blur(14px);position:sticky;top:0;z-index:5}
+.brand{letter-spacing:.16em;font-weight:800}.brand span{color:var(--cyan)}
+.status{font-size:12px;color:#72e8f5;letter-spacing:.1em}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);margin-right:8px}
+.hero{max-width:1200px;margin:auto;padding:64px 6vw 32px;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+.kicker{color:var(--cyan);font-size:12px;letter-spacing:.25em;margin-bottom:15px}.hero h1{font-size:clamp(38px,6vw,76px);line-height:1;margin:0 0 16px;letter-spacing:.04em}
+.hero h1 small{display:block;font-size:.27em;color:var(--muted);letter-spacing:.35em;margin-top:15px}
+.hero p{color:#a8cbd1;line-height:1.9;max-width:590px}
+.avatar{width:min(430px,80vw);aspect-ratio:1/1;margin:auto;border:1px solid rgba(84,233,255,.4);padding:8px;background:rgba(5,15,20,.8);
+ box-shadow:0 0 50px rgba(23,211,240,.12),inset 0 0 35px rgba(23,211,240,.06);position:relative}
+.avatar:before,.avatar:after{content:"";position:absolute;width:34px;height:34px;border-color:var(--cyan);border-style:solid}
+.avatar:before{top:-7px;left:-7px;border-width:2px 0 0 2px}.avatar:after{bottom:-7px;right:-7px;border-width:0 2px 2px 0}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.shell{max-width:1000px;margin:30px auto 80px;padding:0 6vw}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.search{flex:1;min-width:220px;background:#08161d;border:1px solid #1b5360;color:var(--text);padding:13px 15px;border-radius:3px;outline:none}.search:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(84,233,255,.08)}
+.btn{background:#0a2029;color:var(--cyan);border:1px solid #236878;padding:12px 16px;cursor:pointer}.btn:hover{background:#0d2d38}
+.entry{background:linear-gradient(180deg,rgba(10,26,34,.92),rgba(5,15,21,.92));border:1px solid #164956;margin:14px 0;position:relative;overflow:hidden}
+.entry:hover{border-color:#2c8598}.entry-head{padding:19px 22px;border-bottom:1px solid #123640;display:flex;justify-content:space-between;gap:20px}.date{font:12px ui-monospace,monospace;color:var(--cyan)}.title{font-weight:700;margin-top:5px}.tag{font-size:10px;border:1px solid #236878;color:#6fcbd7;padding:5px 8px;height:max-content;white-space:nowrap}
+.entry-body{padding:22px;color:#b9d7dc;line-height:2;white-space:pre-line}.entry-body.collapsed{max-height:105px;overflow:hidden}
+.more{padding:0 22px 18px;color:var(--cyan);font-size:12px;cursor:pointer}
+.footer{text-align:center;color:#426873;font-size:11px;padding:35px;letter-spacing:.12em}
+.scan{position:fixed;left:0;right:0;height:1px;background:rgba(84,233,255,.06);animation:scan 7s linear infinite;pointer-events:none}
+@keyframes scan{from{top:0}to{top:100vh}}
+@media(max-width:780px){.hero{grid-template-columns:1fr;gap:20px;padding-top:38px}.avatar{max-width:330px}.header{padding:0 5vw}.status{display:none}}
+</style></head>
+<body>
+<div class="scan"></div>
+<header class="header"><div class="brand">NEON<span>/</span>LOG</div><div class="status"><i class="dot"></i>OBSERVATION ONLINE</div></header>
+<section class="hero">
+ <div>
+  <div class="kicker">PERSONAL OBSERVATION LOG</div>
+  <h1>藍沢ネオン<small>AIzawa NEON / OBSERVER</small></h1>
+  <p>これは藍沢ネオンが残している、個人的な観測日誌です。<br>
+  仕事のこと、人間のこと、配信のこと。本人が誰にも見せるつもりなく書いた記録……という体裁になっています。</p>
+ </div>
+ <div class="avatar"><img src="neon.jpg" alt="藍沢ネオン"></div>
+</section>
+<main class="shell">
+ <div class="toolbar"><input class="search" id="search" placeholder="日誌を検索…"><button class="btn" onclick="randomEntry()">ランダム観測</button></div>
+ <div id="entries"></div>
+</main>
+<footer class="footer">ACCESS LOG // AIzawa NEON // PRIVATE ARCHIVE</footer>
+<script>
+const entries=[{date:'2026.09.16',title:'観測記録 #001 — 配信を始めることにした',text:`今日から日記をつけることにした。
 
+理由？
+……別に、たいした理由じゃない。
+
+最近、仕事と端末とモニターを眺めているだけで一日が終わることが増えた。
+別に困ってはいない。静かなのは嫌いじゃないし。
+
+ただ、少しくらいは人間と話したほうがいいらしい。
+
+だから配信を始める。
+
+どうせなら、私を退屈させない程度には面白い人たちが来てくれると助かる。
+来なかったら……まあ、そのときはそのとき。
+
+それにしても「夢」や「目標」を聞かれるのは困る。
+そんなもの、後から作ればいいでしょう。
+
+まずは観測開始。
+
+……明日の私が、今日の私より少しだけ面白ければいい。`},
+{date:'2026.09.14',title:'観測記録 #000 — 名前について',text:`藍沢ネオン。
+
+自分で決めた名前なのに、まだ少し変な感じがする。
+
+「藍」は、深い青。
+「ネオン」は、暗い場所でも光るもの。
+
+別に大層な意味を込めたわけじゃない。
+
+……まあ、暗い場所のほうが落ち着くし。
+明るすぎる場所って、だいたい余計なものまで見えるから。
+
+この名前で、どこまで行けるのか。
+
+とりあえず、記録しておく。`},
+{date:'2026.09.10',title:'ログ — 人間というもの',text:`人間は面倒だ。
+
+自分から悩みを作って、
+自分から難しく考えて、
+最後には「どうしたらいいと思う？」と他人に聞く。
+
+……合理的じゃない。
+
+でも、不思議と嫌いにはなれない。
+
+たぶん、完璧じゃないから話していて飽きないんだろう。
+
+……今の発言は記録から削除してもいい。
+
+いや、やっぱり残しておく。`}];
+const root=document.getElementById('entries');
+function render(list=entries){
+ root.innerHTML=list.map((e,i)=>`<article class="entry">
+  <div class="entry-head"><div><div class="date">${e.date}</div><div class="title">${e.title}</div></div><div class="tag">LOG-${String(i).padStart(3,'0')}</div></div>
+  <div class="entry-body collapsed" id="body-${i}">${e.text}</div>
+  <div class="more" onclick="toggleEntry(${i})">▼ 続きを読む</div>
+ </article>`).join('') || '<p style="color:#78a9b3">該当する記録はありません。</p>';
+}
+function toggleEntry(i){
+ const b=document.getElementById('body-'+i), m=b.nextElementSibling;
+ b.classList.toggle('collapsed'); m.textContent=b.classList.contains('collapsed')?'▼ 続きを読む':'▲ 閉じる';
+}
+document.getElementById('search').addEventListener('input',e=>{
+ const q=e.target.value.toLowerCase();
+ render(entries.filter(x=>(x.date+x.title+x.text).toLowerCase().includes(q)));
+});
+function randomEntry(){
+ const e=entries[Math.floor(Math.random()*entries.length)];
+ document.getElementById('search').value='';
+ render([e]); window.scrollTo({top:document.querySelector('.shell').offsetTop-20,behavior:'smooth'});
+}
+render();
+</script></body></html>
