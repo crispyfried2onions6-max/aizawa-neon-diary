@@ -53,6 +53,137 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
  <div class="avatar"><img src="neon.jpg" alt="藍沢ネオン"></div>
 </section>
 <main class="shell">
+
+<section id="profile" class="profile-section" style="margin:45px 0">
+  <div class="kicker">SUBJECT PROFILE</div>
+  <h2>観測対象：藍沢ネオン</h2>
+
+  <div class="profile-grid">
+    <div class="profile-main">
+      <div class="subject-code">SUBJECT : AIZAWA NEON</div>
+      <div class="subject-status">STATUS : ONLINE</div>
+
+      <h3>藍沢ネオン <span>AIzawa NEON</span></h3>
+      <p class="profile-lead">
+        こんばんは。藍沢ネオンです。<br>
+        情報分析とか、システム周りの仕事をしています。<br>
+        ……まあ、難しく考えなくていいですよ。<br>
+        要するに「データを見て、問題を見つけて、どうにかする仕事」です。
+      </p>
+
+      <div class="profile-facts">
+        <div><span>AGE</span><strong>22歳前後</strong></div>
+        <div><span>OCCUPATION</span><strong>情報分析 / システムエンジニア</strong></div>
+        <div><span>STREAM</span><strong>雑談 / ゲーム / IT・PC / 観測日誌</strong></div>
+      </div>
+    </div>
+
+    <div class="profile-side">
+      <div class="terminal">
+        <div>THREAT LEVEL : LOW</div>
+        <div>SOCIAL SKILL : ...まあ、普通</div>
+        <div>COFFEE : NOT REQUIRED</div>
+        <div>SWEET DRINK : REQUIRED</div>
+        <div>MEETING : AVOID IF POSSIBLE</div>
+        <div>STATUS : <b>OBSERVING...</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-section">
+    <div class="kicker">PRIMARY OCCUPATION</div>
+    <h3>主な仕事内容</h3>
+
+    <div class="work-grid">
+      <article class="work-card">
+        <div class="work-no">01</div>
+        <h4>データ分析</h4>
+        <p>大量のデータを整理・分析して、そこから問題や傾向を見つける。</p>
+        <small>「数字は嘘をつかない。……まあ、数字を作った人間は嘘をつくけど。」</small>
+      </article>
+
+      <article class="work-card">
+        <div class="work-no">02</div>
+        <h4>システム監視・管理</h4>
+        <p>システムが正常に動いているかを確認し、異常があれば原因を調査する。</p>
+      </article>
+
+      <article class="work-card">
+        <div class="work-no">03</div>
+        <h4>トラブル対応</h4>
+        <p>エラーや不具合が発生した際、ログやデータを確認して原因を特定する。</p>
+      </article>
+
+      <article class="work-card">
+        <div class="work-no">04</div>
+        <h4>業務改善</h4>
+        <p>「昔からこうやってる」という理由だけで残っている無駄な作業を見つけ、効率化する。</p>
+      </article>
+
+      <article class="work-card">
+        <div class="work-no">05</div>
+        <h4>情報整理</h4>
+        <p>複雑になった情報を整理して、必要な情報をすぐ見つけられる状態にする。</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="character-section">
+    <div class="character-column">
+      <div class="kicker">PERSONAL DATA</div>
+      <h3>好きなもの / 苦手なもの</h3>
+      <div class="likes">
+        <span>PC</span><span>ゲーム</span><span>夜</span><span>静かな場所</span><span>甘い飲み物</span>
+      </div>
+      <div class="dislikes">
+        <span>非効率</span><span>無意味な会議</span><span>「昔からこうだから」</span><span>知ったかぶり</span>
+      </div>
+    </div>
+
+    <div class="character-column">
+      <div class="kicker">OBSERVATION NOTE</div>
+      <h3>性格</h3>
+      <p>
+        口は悪い。でも、見捨てない。<br>
+        正論と皮肉を混ぜて話すタイプ。無駄や非効率を嫌う一方で、
+        困っている人を放っておくことはできない。
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+.profile-section .profile-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+.profile-section .profile-main,.profile-section .profile-side,.work-card,.character-column{
+  border:1px solid rgba(85,220,235,.22);background:rgba(5,22,29,.62);padding:22px;
+  box-shadow:0 0 24px rgba(0,210,255,.04)
+}
+.subject-code,.subject-status{font-family:monospace;color:#63d8e8;font-size:12px;letter-spacing:1px;margin-bottom:7px}
+.profile-section h3{font-size:25px;margin:15px 0 10px}
+.profile-section h3 span{font-size:12px;font-weight:normal;color:#6c9da7;margin-left:8px}
+.profile-lead{line-height:1.9;color:#c4d9dc}
+.profile-facts{display:grid;gap:8px;margin-top:18px}
+.profile-facts div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:8px 0}
+.profile-facts span,.work-no{color:#54d6e8;font-family:monospace;font-size:11px}
+.profile-facts strong{font-weight:normal;text-align:right}
+.terminal{font:12px/2 monospace;color:#72ddea;background:#020b0f;padding:18px;height:100%;box-sizing:border-box}
+.terminal b{color:#b9ffff}
+.work-section{margin-top:35px}
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.work-card h4{margin:8px 0;font-size:18px}
+.work-card p{color:#bfd3d6;line-height:1.7}
+.work-card small{color:#76aeb7;line-height:1.6}
+.character-section{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:35px}
+.likes,.dislikes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.likes span,.dislikes span{padding:6px 10px;border:1px solid rgba(80,220,235,.25);font-size:12px}
+.dislikes span{border-color:rgba(230,130,130,.2);color:#c99}
+.character-column p{line-height:1.8;color:#c4d9dc}
+@media(max-width:700px){
+ .profile-section .profile-grid,.work-grid,.character-section{grid-template-columns:1fr}
+ .profile-facts div{gap:15px}
+}
+</style>
+
 <section id="daily-log" class="daily-log" style="margin:35px 0">
  <div class="kicker">DAILY OBSERVATION</div>
  <h2>今日の観測</h2>
