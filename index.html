@@ -53,6 +53,41 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
  <div class="avatar"><img src="neon.jpg" alt="藍沢ネオン"></div>
 </section>
 <main class="shell">
+<section id="daily-log" class="daily-log" style="margin:35px 0">
+ <div class="kicker">DAILY OBSERVATION</div>
+ <h2>今日の観測</h2>
+ <article class="entry">
+  <div class="entry-head"><div><div class="date" id="dailyDate"></div><div class="title" id="dailyTitle"></div></div><div class="tag">TODAY</div></div>
+  <div class="entry-body" id="dailyText"></div>
+  <div class="more" id="nextObservation" style="cursor:pointer">↻ 別の観測を見る</div>
+ </article>
+ <p style="color:#78a9b3;font-size:12px">毎日、日付に合わせて今日の短い観測が表示されます。過去の観測記録は下のログに蓄積できます。</p>
+</section>
+<script>
+(() => {
+ const observations=[
+  ["人間観測ログ","今日も人間は「あと5分」を信用していた。","その5分が30分になる現象について、私はまだ解明できていない。"],
+  ["深夜観測ログ","夜は静かでいい。","余計な通知も会議もない。……人間まで寝ているなら、なおさらね。"],
+  ["効率観測ログ","効率化のための会議が始まった。","効率化について話すために1時間使う。……なるほど。実に人間らしい。"],
+  ["システム観測ログ","エラーが出た。","原因を調べたら、原因は「確認していなかった」だった。……まあ、そういう日もある。"],
+  ["ゲーム観測ログ","ゲームを始めると時間が消える。","仕様なのかバグなのかは知らない。少なくとも、私には修正する気がない。"],
+  ["観測メモ","甘い飲み物を飲んだ。","糖分は偉大。少なくとも、今だけは世界が少し平和に見える。"],
+  ["人間観測ログ","「みんなやってるから」という理由を聞いた。","それ、理由じゃなくて説明を諦めただけじゃない？"],
+  ["夜間ログ","今日も一日が終わる。","成果？……まあ、ここまで生き残った。それで十分じゃない？"]
+ ];
+ const day=Math.floor(Date.now()/86400000);
+ let index=((day%observations.length)+observations.length)%observations.length;
+ function render(){
+   const o=observations[index],d=new Date();
+   dailyDate.textContent=d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0");
+   dailyTitle.textContent=o[0];
+   dailyText.innerHTML=o[1]+"<br><br>"+o[2];
+ }
+ nextObservation.onclick=()=>{index=(index+1)%observations.length;render()};
+ render();
+})();
+</script>
+
  <div class="toolbar"><input class="search" id="search" placeholder="日誌を検索…"><button class="btn" onclick="randomEntry()">ランダム観測</button></div>
  <div id="entries"></div>
 </main>
